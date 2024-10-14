@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +9,21 @@ import java.util.*;
 File workingDirectory;
 
 void main() {
-    String path = "C:/Users/HUGO/Downloads";
+
+    String path = "";
+    JFileChooser chooser = new JFileChooser();
+    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+    int returnValue = chooser.showOpenDialog(null);
+
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+        File selectedDirectory = chooser.getSelectedFile();
+        path = selectedDirectory.getAbsolutePath();
+
+    } else {
+        System.out.println("No se seleccionó ningún directorio.");
+    }
+
     workingDirectory = new File(path);
     createDirectoriesByExtensionFiles();
 
